@@ -1,4 +1,4 @@
-### Method 1
-in js, showSelection method is used for using the SectionID from the argument to scroll to the specified section
-### Method 2
-ToggleTheme is used for changing the theme using back and forth action, where each press toggles dark and light themes
+### loadWeather
+a function that gets used when the user presses regresh weather button and used to fetch the weather data in madinah
+### showSecretElement
+a function that is used after pressing either themtoggle button or refresh weather button in order to see if the specific conditions are met to show the secret message
