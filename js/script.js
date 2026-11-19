@@ -1,4 +1,4 @@
-var weatherLoaded = false;
+var weatherIsLoaded = false;
 
 let date = new Date();
 alert("Welcome to my portfolio! You are viewing this page on\n" + date.getHours() + ":" + date.getMinutes() + ", on the " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + ".\nI hope you enjoy your visit!");
@@ -19,7 +19,7 @@ function toggleTheme() {
     const newTheme = theme === "light" ? "dark" : "light";
     document.body.dataset.theme = newTheme;
     localStorage.setItem("theme", newTheme);
-    showSecretElement([weatherLoaded, document.body.dataset.theme === "dark"]);
+    showSecretElement([weatherIsLoaded, document.body.dataset.theme === "dark"]);
 }
     else {
         alert("Error: failed to retrieve theme from localStorage, refresh the page."); //task 5, error ahndling and user feedback is done here
@@ -64,10 +64,10 @@ async function loadWeather() {
     const response = await fetch(url);
 
     if (!response.ok) {
-        weatherLoaded = false;
+        weatherIsLoaded = false;
       throw new Error(`Request failed: ${response.status}`);
     }
-    weatherLoaded = true;
+    weatherIsLoaded = true;
     const data = await response.json();
     const current = data.current;
     const description =
@@ -78,16 +78,16 @@ async function loadWeather() {
       `feels like ${current.apparent_temperature} °C. ` +
       `Humidity: ${current.relative_humidity_2m}%. ` +
       `Wind: ${current.wind_speed_10m} km/h.`;
-      showSecretElement([weatherLoaded, document.body.dataset.theme === "dark"]);
+      showSecretElement([weatherIsLoaded, document.body.dataset.theme === "dark"]);
   } catch (error) {
     console.error("Could not load the weather:", error);
     weatherElement.textContent = "Weather could not be loaded.";
   }
 }
 
-function showSecretElement([weatherLoaded, isDarkMode]) {
+function showSecretElement([weatherIsLoaded, isDarkMode]) {
     const secretElement = document.getElementById("mdryDescription");
-    if (weatherLoaded && isDarkMode) {
+    if (weatherIsLoaded && isDarkMode) {
         secretElement.textContent = "You have unlocked the secret message! by loading the weather and being in dark mode.";}
     else {
         secretElement.textContent = "There is something you haven't seen yet!";
